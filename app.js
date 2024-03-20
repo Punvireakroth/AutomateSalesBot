@@ -1,10 +1,14 @@
 import express from 'express';
 import configEngine from './src/config/viewEngine';
 import initWebRoutes from './src/routes/web';
+import bodyParser from 'body-parser'; 
 require('dotenv').config;
 
 let app = express();
 
+// Add middleware to parse request bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 configEngine(app);
 
