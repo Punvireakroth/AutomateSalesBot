@@ -4,8 +4,9 @@
 - `npm start`
 
 ### Setup enviroment file
+```
 PORT=
 VERIFY_TOKEN=
 PAGE_ACCESS_TOKEN=
-
+```
 
