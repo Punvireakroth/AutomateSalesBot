@@ -142,7 +142,9 @@ let handlePostback = async (sender_psid, received_postback) => {
 }
 
 // Sends response messages via the Send API
-function callSendAPI(sender_psid, response) {
+let callSendAPI = async (sender_psid, response) => {
+    await homepageService.markMessageRead(sender_psid);
+    await homepageService.sendTypingOn(sender_psid);
     // Construct the message body
     let request_body = {
         "recipient": {
