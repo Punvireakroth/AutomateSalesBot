@@ -78,7 +78,9 @@ let handleMessage = async (sender_psid, received_message) =>{
             await chatbotService.sendLearnMore(sender_psid);
         } else if(payload === 'TALK_AGENT') {
             await chatbotService.requestTalkToAgent(sender_psid);
-        } 
+        } else if (payload === 'DETIAL_INFO') {
+            await chatbotService.handleProductDetial(sender_psid);
+        }
         return;
     } 
 
@@ -147,6 +149,7 @@ let handlePostback = async (sender_psid, received_postback) => {
             break;
         case 'DETIAL_INFO':
             await chatbotService.handleProductDetial(sender_psid);
+            break;
         default:
             console.log('Run default switch case');
 
