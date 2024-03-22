@@ -6,8 +6,6 @@ import homepageService from './homepageService';
 
 // Sends response messages via the Send API
 let sendMessage = (sender_psid, response) => {
-
-
     return new Promise(async (resolve, reject) => {
         try {
             await homepageService.markMessageRead(sender_psid);
@@ -18,8 +16,7 @@ let sendMessage = (sender_psid, response) => {
                     "id": sender_psid
                 },
                 "message": response
-            }
-
+            };
 
             // Send the HTTP request to the Messenger Platform
             request({
@@ -36,9 +33,9 @@ let sendMessage = (sender_psid, response) => {
                     reject("Unable to send message:" + err);
                 }
             });
-        } catch {
-            reject('Try again')
-        };
+        } catch (e) {
+            reject(e);
+        }
     });
 };
 
@@ -55,7 +52,7 @@ let handleFirstUser = (sender_psid, response) => {
                 "attachment": {
                     'type': 'image',
                     'payload': {
-                        'url': 'https://i.pinimg.com/564x/d9/03/0a/d9030a5696d2507a1dfb38a686ac93c2.jpg',
+                        'url': 'https://i.pinimg.com/564x/4f/a9/65/4fa965953eca58e83539070ba49bc800.jpg',
                     }
                 }
             }
@@ -76,8 +73,99 @@ let handleFirstUser = (sender_psid, response) => {
             await sendMessage(sender_psid, learnMore);
 
             resolve('DONE');
+        } catch (e) {
+            reject(e);
         }
-        catch (e) {
+    });
+};
+
+let sendLearnMore = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            // Send a generic template message
+            let response = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [
+                            {
+                                "title": "សេវាកម្ម",
+                                "image_url": "https://i.pinimg.com/736x/67/6f/61/676f616b3aa4ad242863d94c89df75e3.jpg",
+                                "subtitle": "សេវាកម្មរបស់ពួកយើង",
+                                "default_action": {
+                                    "type": "web_url",
+                                    "url": "https://www.originalcoastclothing.com/",
+                                    "webview_height_ratio": "tall"
+                                },
+                                "buttons": [{
+                                    "type": "postback",
+                                    "title": "ពត៍មានបន្ថែម",
+                                    "payload": "DETIAL_INFO"
+                                }]
+                            },
+                            {
+                                "title": "តម្លៃ",
+                                "image_url": "https://i.pinimg.com/564x/2a/e0/15/2ae015b00d2f9dea172c6ca256f2196f.jpg",
+                                "subtitle": "លោកអ្នកអាចជ្រើសរើសនូវជម្រើសតម្លៃដ៏ច្រើនបែប",
+                                "default_action": {
+                                    "type": "web_url",
+                                    "url": "https://www.originalcoastclothing.com/",
+                                    "webview_height_ratio": "tall"
+                                },
+                                "buttons": [{
+                                    "type": "postback",
+                                    "title": "ពត៍មានបន្ថែម",
+                                    "payload": "DETIAL_INFO"
+                                }]
+                            },
+                            {
+                                "title": "សេវាកម្ម",
+                                "image_url": "https://i.pinimg.com/736x/67/6f/61/676f616b3aa4ad242863d94c89df75e3.jpg",
+                                "subtitle": "សេវាកម្មរបស់ពួកយើង",
+                                "default_action": {
+                                    "type": "web_url",
+                                    "url": "https://www.originalcoastclothing.com/",
+                                    "webview_height_ratio": "tall"
+                                },
+                                "buttons": [{
+                                    "type": "postback",
+                                    "title": "ពត៍មានបន្ថែម",
+                                    "payload": "DETIAL_INFO"
+                                }]
+                            },
+                            {
+                                "title": "តម្លៃ",
+                                "image_url": "https://i.pinimg.com/564x/4d/68/fc/4d68fc547649d93b7e9d3e6f5b04b819.jpg",
+                                "subtitle": "លោកអ្នកអាចជ្រើសរើសនូវជម្រើសតម្លៃដ៏ច្រើនបែប",
+                                "default_action": {
+                                    "type": "web_url",
+                                    "url": "https://www.originalcoastclothing.com/",
+                                    "webview_height_ratio": "tall"
+                                },
+                                "buttons": [{
+                                    "type": "postback",
+                                    "title": "ពត៍មានបន្ថែម",
+                                    "payload": "DETIAL_INFO"
+                                }]
+                            },
+                        ],
+                    }
+                }
+            };
+            await sendMessage(sender_psid, response);
+            resolve('Done');
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
+let requestTalkToAgent = (sender_psid) => {
+    return new Promise((resolve, reject) => {
+        try {
+
+        } catch (e) {
             reject(e);
         }
     });
@@ -87,4 +175,6 @@ let handleFirstUser = (sender_psid, response) => {
 module.exports = {
     sendMessage,
     handleFirstUser,
+    sendLearnMore,
+    requestTalkToAgent,
 };

@@ -71,6 +71,18 @@ let postWebhook = (req, res) => {
 
 // Handles messages events
 let handleMessage = async (sender_psid, received_message) =>{
+    // Check if incoming message is a quick reply 
+    if(received_message && received_message.quick_reply && received_message.quick_reply.payload) {
+        let payload = received_message.quick_reply.payload;
+        if(payload === 'LEARN_MORE') {
+            await chatbotService.sendLearnMore(sender_psid);
+        } else if(payload === 'TALK_AGENT') {
+            await chatbotService.requestTalkToAgent(sender_psid);
+        } 
+        return;
+    } 
+
+
     let response;
 
     // Check if the message contains text
@@ -133,6 +145,8 @@ let handlePostback = async (sender_psid, received_postback) => {
         case 'GET_STARTED':
             await chatbotService.handleFirstUser(sender_psid);
             break;
+        case 'DETIAL_INFO':
+            await chatbotService.handleProductDetial(sender_psid);
         default:
             console.log('Run default switch case');
 

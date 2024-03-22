@@ -15,19 +15,20 @@ let handleSetupProfileAPI = () => {
                     "call_to_actions": [{
                             "type": "postback",
                             "title": "Talk to an agent",
-                            "payload": "CARE_HELP"
+                            "payload": "TALK_AGENT"
                         },
                         {
                             "type": "postback",
-                            "title": "Outfit suggestions",
-                            "payload": "CURATION"
+                            "title": "Restart this conversion",
+                            "payload": "RESTART"
                         },
                         {
                             "type": "web_url",
-                            "title": "Shop now",
-                            "url": "https://www.originalcoastclothing.com/",
+                            "title": "Check out my facebook",
+                            "url": "https://www.facebook.com/virak.roth.545",
                             "webview_height_ratio": "full"
-                        }
+                        },
+                        
                     ]
                 }],
                 "whitelisted_domains": [
