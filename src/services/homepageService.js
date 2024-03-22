@@ -1,19 +1,15 @@
+
+require('dotenv').config();
 import request from 'request';
 
 let handleSetupProfileAPI = () => {
     return new Promise((resolve, reject) => {
         try {
-            let url = `https://graph.facebook.com/v18.0/me/messenger_profile?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
+            let url = `https://graph.facebook.com/v6.0/me/messenger_profile?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
             let request_body = { 
-                "greeting":[
-                    {
-                      "locale":"default",
-                      "text":"Hello!"
-                    }, {
-                      "locale":"en_US",
-                      "text":"Timeless apparel for the masses."
-                    },
-                ],
+                "get_started": {
+                    "payload": "GET_STARTED"
+                },
                 "persistent_menu": [
                     {
                         "locale": "default",
@@ -39,7 +35,7 @@ let handleSetupProfileAPI = () => {
                     }
                 ],
                 "whitelisted_domains":[
-                    "https://punvireakroth.github.io/VireakRoth-Portfolio/",
+                    "https://e119-217-197-11-10.ngrok-free.app",
                     
                 ],
 
@@ -50,6 +46,7 @@ let handleSetupProfileAPI = () => {
                 "json": request_body,
             }, (err, res, body) => {
                 if (!err) {
+                    // console.log(body);
                     resolve('DONE')
                 } else {
                     reject('Unable to send message' + err)
@@ -61,7 +58,30 @@ let handleSetupProfileAPI = () => {
     });
 }
 
+let getUserName = (serder_psid) => {
+    let url = `https://graph.facebook.com/${serder_psid}?fields=first_name,last_name,profile_pic&access_token=${process.env.PAGE_ACCESS_TOKEN}`
+    return new Promise((resolve, reject) => {
+        try {
+            request({
+                "uri": url,
+                "method": "GET",
+            }, (err, res, body) => {
+                if (!err) {
+                    body = JSON.parse(body);
+                    let username = `${body.first_name} ${body.last_name}`;
+                    resolve(username);
+                } else {
+                    reject('Unable to send message' + err)
+                }
+            });
+            
+        } catch (e) {
+            reject(e)
+        }
+    });
+}
 
 module.exports = {
     handleSetupProfileAPI,
+    getUserName,
 }

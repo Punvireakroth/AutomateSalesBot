@@ -115,18 +115,28 @@ function handleMessage(sender_psid, received_message) {
 }
 
 // Handles messaging_postbacks events (When the user click on facebook button)
-function handlePostback(sender_psid, received_postback) {
+let handlePostback = async (sender_psid, received_postback) => {
     let response;
   
   // Get the payload for the postback
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'yes') {
-    response = { "text": "Thanks!" }
-  } else if (payload === 'no') {
-    response = { "text": "Oops, try sending another image." }
-  }
+    switch(payload) {
+        case 'yes':
+            response = { "text": "Thanks!" };
+            break;
+        case 'no':
+            response = { "text": "Oops, try sending another image." }
+            break;
+        case 'GET_STARTED':
+            let username = await homepageService.getUserName(sender_psid);
+            response = {"text": `👋 សួស្ដី, ${username} ❤️! អរគុណសម្រាប់ការទំនាក់ទំនងមកកាន់យើងខ្ញុំ 🤔 \n\n តើមានអ្វីខ្ញុំអាចជួយអ្នកបាន?`};
+            break;
+        default:
+            console.log('Run default switch case');
+
+    }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
@@ -169,9 +179,14 @@ let handleSetupProfile = async (req, res) => {
     await homepageService.handleSetupProfileAPI();
 }
 
+let getSetupProfilePage = (req, res) => {
+    return res.render("profile.ejs");
+};
+
 module.exports = {
     getHomePage,
     getWebhook,
     postWebhook,
-    handleSetupProfile
+    handleSetupProfile,
+    getSetupProfilePage
 };
