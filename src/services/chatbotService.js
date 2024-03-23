@@ -217,4 +217,5 @@ module.exports = {
     sendLearnMore,
     requestTalkToAgent,
     handleProductDetial,
+    requestTalkToAgent,
 };

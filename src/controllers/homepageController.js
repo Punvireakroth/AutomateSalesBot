@@ -78,9 +78,11 @@ let handleMessage = async (sender_psid, received_message) =>{
             await chatbotService.sendLearnMore(sender_psid);
         } else if(payload === 'TALK_AGENT') {
             await chatbotService.requestTalkToAgent(sender_psid);
-        } else if (payload === 'DETIAL_INFO') {
-            await chatbotService.handleProductDetial(sender_psid);
-        }
+        } 
+
+        // else if (payload === 'DETIAL_INFO') {
+        //     await chatbotService.handleProductDetial(sender_psid);
+        // }
         return;
     } 
 
@@ -138,17 +140,17 @@ let handlePostback = async (sender_psid, received_postback) => {
 
   // Set the response based on the postback payload
     switch(payload) {
-        case 'yes':
-            response = { "text": "Thanks!" };
-            break;
-        case 'no':
-            response = { "text": "Oops, try sending another image." }
-            break;
         case 'GET_STARTED':
             await chatbotService.handleFirstUser(sender_psid);
             break;
         case 'DETIAL_INFO':
             await chatbotService.handleProductDetial(sender_psid);
+            break;
+        case 'RESTART':
+            await chatbotService.handleFirstUser(sender_psid);
+            break;
+        case 'TALK_AGENT':
+            await chatbotService.requestTalkToAgent(sender_psid);
             break;
         default:
             console.log('Run default switch case');
