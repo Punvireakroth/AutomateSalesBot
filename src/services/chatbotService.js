@@ -1,6 +1,7 @@
 require('dotenv').config();
 import request from 'request';
 import homepageService from './homepageService';
+import messageTemplate from './messageTemplate';
 
 
 
@@ -67,7 +68,6 @@ let handleFirstUser = (sender_psid, response) => {
                     "image_url": "http://example.com/img/red.png"
                 }],
             };
-
             await sendMessage(sender_psid, firstResponse);
             await sendMessage(sender_psid, secondResponse);
             await sendMessage(sender_psid, learnMore);
@@ -83,77 +83,11 @@ let sendLearnMore = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             // Send a generic template message
-            let response = {
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
-                        "elements": [
-                            {
-                                "title": "សេវាកម្ម",
-                                "image_url": "https://i.pinimg.com/736x/67/6f/61/676f616b3aa4ad242863d94c89df75e3.jpg",
-                                "subtitle": "សេវាកម្មរបស់ពួកយើង",
-                                "default_action": {
-                                    "type": "web_url",
-                                    "url": "https://www.originalcoastclothing.com/",
-                                    "webview_height_ratio": "tall"
-                                },
-                                "buttons": [{
-                                    "type": "postback",
-                                    "title": "ពត៍មានបន្ថែម",
-                                    "payload": "DETIAL_INFO"
-                                }]
-                            },
-                            {
-                                "title": "តម្លៃ",
-                                "image_url": "https://i.pinimg.com/564x/2a/e0/15/2ae015b00d2f9dea172c6ca256f2196f.jpg",
-                                "subtitle": "លោកអ្នកអាចជ្រើសរើសនូវជម្រើសតម្លៃដ៏ច្រើនបែប",
-                                "default_action": {
-                                    "type": "web_url",
-                                    "url": "https://www.originalcoastclothing.com/",
-                                    "webview_height_ratio": "tall"
-                                },
-                                "buttons": [{
-                                    "type": "postback",
-                                    "title": "ពត៍មានបន្ថែម",
-                                    "payload": "DETIAL_INFO"
-                                }]
-                            },
-                            {
-                                "title": "សេវាកម្ម",
-                                "image_url": "https://i.pinimg.com/736x/67/6f/61/676f616b3aa4ad242863d94c89df75e3.jpg",
-                                "subtitle": "សេវាកម្មរបស់ពួកយើង",
-                                "default_action": {
-                                    "type": "web_url",
-                                    "url": "https://www.originalcoastclothing.com/",
-                                    "webview_height_ratio": "tall"
-                                },
-                                "buttons": [{
-                                    "type": "postback",
-                                    "title": "ពត៍មានបន្ថែម",
-                                    "payload": "DETIAL_INFO"
-                                }]
-                            },
-                            {
-                                "title": "តម្លៃ",
-                                "image_url": "https://i.pinimg.com/564x/4d/68/fc/4d68fc547649d93b7e9d3e6f5b04b819.jpg",
-                                "subtitle": "លោកអ្នកអាចជ្រើសរើសនូវជម្រើសតម្លៃដ៏ច្រើនបែប",
-                                "default_action": {
-                                    "type": "web_url",
-                                    "url": "https://www.originalcoastclothing.com/",
-                                    "webview_height_ratio": "tall"
-                                },
-                                "buttons": [{
-                                    "type": "postback",
-                                    "title": "ពត៍មានបន្ថែម",
-                                    "payload": "DETIAL_INFO"
-                                }]
-                            },
-                        ],
-                    }
-                }
-            };
+
+            let response = messageTemplate.sendLearnMoreTemplate();
+
             await sendMessage(sender_psid, response);
+
             resolve('Done');
         } catch (e) {
             reject(e);
@@ -166,29 +100,15 @@ let handleProductDetial = (sender_psid) => {
         try {
             console.log('Inside handleProductDetial function');
             
-            // Send a generic template message
-            let response = { 
-                "text": `តើលោកអ្នកពិបាកក្នុងការធ្វើទីផ្សារផលិតផលឬសេវាកម្មលើប្រពន្ធ័ផ្សព្វផ្សាយ ដើម្បីជម្រុញការលក់ណាស់មែនទេ?
+            // Get the information and askPrice from the template
+            let { information, askPrice } = messageTemplate.handleProductDetialTemplate();
 
-                😍
-                ជ្រើសរើសយកសេវាកម្មរបស់យើងខ្ញុំ ធានាថាអតិថិជន និងតាមដាន Facebook Page ជាប្រចាំមិនខាន
-                👍🏻
-                រៀបចំ Facebook Page អោយមានស្តង់ដារ
-                👍🏻
-                សរសេរ Caption និងរៀបចំ Post អោយមានភាពទាក់ទាញ 
-                👍🏻
-                រៀបចំ Boost Post អោយចំអតិជនគោលដៅ និងកាត់បន្ថយថ្លៃចំនាយ 
-                👍🏻
-                រៀបចំ Messages ឆ្លើយតបជាមួយអតិថិជនដោយស្វ័យប្រវត្តិ 
-                👍🏻
-                ដោះស្រាយបញ្ហា Facebook Page 
-                👍🏻
-                វិភាគលើរបាយការណ៍អតិថិជនចាស់ និងអតិថិជនថ្មី
-                🥰
-                ក្រុមហ៊ុនយើងខ្ញុំ ជាក្រុមហ៊ុនបច្ចេកវិទ្យាប្រព័ន្ធផ្សព្វផ្សាយឈានមុខគេប្រកបដោយភាពច្នៃប្រឌិតថ្មី មានប្រសិទ្ធិភាពខ្ពស់ដោយភ្ជាប់ទៅអ្នកប្រើប្រាស់ និងអ្នកផ្សាយពាណិជ្ជកម្ម 
-                `
-            };
-            await sendMessage(sender_psid, response);
+            // Send the information
+            await sendMessage(sender_psid, information);
+
+            // Send the askPrice prompt
+            await sendMessage(sender_psid, askPrice);
+
             resolve('Done');
         } catch (e) {
             console.error('Error in handleProductDetial:', e);
