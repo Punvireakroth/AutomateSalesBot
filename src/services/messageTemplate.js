@@ -104,6 +104,7 @@ let handleProductDetialTemplate = () => {
             "content_type": "text",
             "title": "សាកសួរតម្លៃ",
             "payload": "ASK_PRICE",
+            "image_url": "http://example.com/img/red.png"
         }],
     };
     
@@ -111,8 +112,32 @@ let handleProductDetialTemplate = () => {
 }
 
 
+let requestPricesOptionsTemplate = () => {
+    let priceInformation = {
+        'text':`
+        👉🏻 សម្រាប់កញ្ចប់ Bronze តម្លៃ 200$/ខែ
+        👉🏻 សម្រាប់កញ្ចប់ Silver តម្លៃ 300$/ខែ
+        👉🏻 សម្រាប់កញ្ចប់ Gold តម្លៃ 300$/ខែ
+        👉🏻 សម្រាប់កញ្ចប់ Platinum តម្លៃ 300$/ខែ
+        👉🏻 សម្រាប់កញ្ចប់ Silver តម្លៃ 15%/ខែ នៃតម្លៃ ad
+        `,
+    }
+
+    let askInfo = {
+        "text": "ចុចប៊ូតុងខាងក្រោមដើម្បីទទួលបានពត៍មានទំនាក់ទំនង",
+        "quick_replies": [{
+            "content_type": "text",
+            "title": "ពត៍មានទំនាក់ទំនង",
+            "payload": "ASK_INFO",
+        }],
+    };
+    
+    return { priceInformation, askInfo };
+}
+
 
 module.exports = {
     sendLearnMoreTemplate,
     handleProductDetialTemplate,
+    requestPricesOptionsTemplate
 };
