@@ -152,6 +152,9 @@ let handlePostback = async (sender_psid, received_postback) => {
         case 'TALK_AGENT':
             await chatbotService.requestTalkToAgent(sender_psid);
             break;
+        case 'ASK_PRICE':
+            await chatbotService.requestPricesOptions(sender_psid);
+            break;
         default:
             console.log('Run default switch case');
 
