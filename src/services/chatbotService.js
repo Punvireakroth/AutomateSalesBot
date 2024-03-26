@@ -123,13 +123,10 @@ let requestPricesOptions =  (sender_psid) => {
             console.log('Inside handleProductDetial function');
             
             // Get the information and askPrice from the template
-            let { priceInformation, askInfo } = messageTemplate.requestPricesOptionsTemplate();
+            let response = messageTemplate.requestPricesOptionsTemplate();
 
             // Send the information
-            await sendMessage(sender_psid, priceInformation);
-
-            // Send the askPrice prompt
-            await sendMessage(sender_psid, askInfo);
+            await sendMessage(sender_psid, response);
 
             resolve('Done');
         } catch (e) {
@@ -142,7 +139,15 @@ let requestPricesOptions =  (sender_psid) => {
 let vendorInformation = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
+            console.log('Inside handleProductDetial function');
+            
+            // response from the template
+            let response = messageTemplate.vendorInformationTemplate();            
 
+            // Send the Vendor informations
+            await sendMessage(sender_psid, response);
+
+            resolve('Done');
         } catch(e) {
             reject(e);
         }
