@@ -99,16 +99,12 @@ let handleProductDetial = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             console.log('Inside handleProductDetial function');
-            
+    
             // Get the information and askPrice from the template
-            let { information, askPrice } = messageTemplate.handleProductDetialTemplate();
+            let response = messageTemplate.handleProductDetialTemplate();
 
             // Send the information
-            await sendMessage(sender_psid, information);
-
-            // Send the askPrice prompt
-            await sendMessage(sender_psid, askPrice);
-
+            await sendMessage(sender_psid, response);
             resolve('Done');
         } catch (e) {
             console.error('Error in handleProductDetial:', e);
