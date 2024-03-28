@@ -163,6 +163,28 @@ let sendLookupRegister = (sender_psid) => {
 }
 
 
+let setInfoRegisterByWebView = (sender_psid) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
+
+let backToMainMenu = (sender_psid) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let {response, registerUser} = messageTemplate.vendorInformationTemplate();            
+            await sendMessage(sender_psid, response);
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
 let requestTalkToAgent = (sender_psid) => {
     return new Promise((resolve, reject) => {
         try {
@@ -184,4 +206,6 @@ module.exports = {
     requestPricesOptions,
     vendorInformation,
     sendLookupRegister,
+    setInfoRegisterByWebView,
+    backToMainMenu
 };
