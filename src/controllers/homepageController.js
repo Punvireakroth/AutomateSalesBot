@@ -139,11 +139,11 @@ let handlePostback = async (sender_psid, received_postback) => {
         case 'GET_STARTED':
             await chatbotService.handleFirstUser(sender_psid);
             break;
-        case 'DETIAL_INFO':
-            await chatbotService.handleProductDetial(sender_psid);
-            break;
         case 'RESTART':
             await chatbotService.handleFirstUser(sender_psid);
+            break;
+        case 'DETIAL_INFO':
+            await chatbotService.handleProductDetial(sender_psid);
             break;
         case 'TALK_AGENT':
             await chatbotService.requestTalkToAgent(sender_psid);

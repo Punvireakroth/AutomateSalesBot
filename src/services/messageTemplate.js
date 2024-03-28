@@ -40,7 +40,7 @@ let sendLearnMoreTemplate = () => {
                     },
                     {
                         "title": "សេវាកម្ម",
-                        "image_url": "https://i.pinimg.com/736x/67/6f/61/676f616b3aa4ad242863d94c89df75e3.jpg",
+                        "image_url": "https://i.pinimg.com/564x/29/f8/e0/29f8e0398171290d487617bf043e89bd.jpg",
                         "subtitle": "សេវាកម្មរបស់ពួកយើង",
                         "default_action": {
                             "type": "web_url",
@@ -55,7 +55,7 @@ let sendLearnMoreTemplate = () => {
                     },
                     {
                         "title": "តម្លៃ",
-                        "image_url": "https://i.pinimg.com/564x/4d/68/fc/4d68fc547649d93b7e9d3e6f5b04b819.jpg",
+                        "image_url": "https://i.pinimg.com/564x/15/45/74/1545744781e1fb85d7c87db6f5c90460.jpg",
                         "subtitle": "លោកអ្នកអាចជ្រើសរើសនូវជម្រើសតម្លៃដ៏ច្រើនបែប",
                         "default_action": {
                             "type": "web_url",

@@ -16,13 +16,13 @@ let handleSetupProfileAPI = () => {
                         "call_to_actions": [
                             {
                                 "type": "postback",
-                                "title": "TALK_AGENT",
+                                "title": "Talk to customer support",
                                 "payload": "TALK_AGENT"
                             },
                             {
                                 "type": "postback",
                                 "title": "Restart this conversation",
-                                "payload": "RESTART_CONVERSATION"
+                                "payload": "RESTART"
                             },
                         ]
                     }
