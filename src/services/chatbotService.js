@@ -137,10 +137,12 @@ let vendorInformation = (sender_psid) => {
             console.log('Inside handleProductDetial function');
             
             // response from the template
-            let response = messageTemplate.vendorInformationTemplate();            
+            let {response, registerUser} = messageTemplate.vendorInformationTemplate();            
 
             // Send the Vendor informations
             await sendMessage(sender_psid, response);
+            await sendMessage(sender_psid, registerUser);
+
 
             resolve('Done');
         } catch(e) {
@@ -148,6 +150,18 @@ let vendorInformation = (sender_psid) => {
         }
     });
 }
+
+let sendLookupRegister = (sender_psid) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let response = messageTemplate.sendLookupRegisterTemplate();
+            await sendMessage(sender_psid, response);
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
 
 let requestTalkToAgent = (sender_psid) => {
     return new Promise((resolve, reject) => {
@@ -168,5 +182,6 @@ module.exports = {
     handleProductDetial,
     requestTalkToAgent,
     requestPricesOptions,
-    vendorInformation
+    vendorInformation,
+    sendLookupRegister,
 };

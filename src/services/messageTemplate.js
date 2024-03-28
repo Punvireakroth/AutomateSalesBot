@@ -149,13 +149,50 @@ let vendorInformationTemplate = () => {
             }
         }
     }
+
+    let registerUser = {
+        "text": "ចុចប៊ូតុងខាងក្រោមដើម្បីទទួលបានធ្វើការចុះឈ្មោះ",
+        "quick_replies": [{
+            "content_type": "text",
+            "title": "ចុះឈ្មោះ",
+            "payload": "REGISTER_USER",
+        }],
+    };
     
-    return response;
+    return {response, registerUser};
+    }
+
+
+    let sendLookupRegisterTemplate = () => {
+        let response = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "button",
+                    "text": "បំពេញពត៍មានដើម្បីចុះឈ្មោះ",
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "011 12345678",
+                            "payload": "SET_INFO_REGISTER" 
+                
+                        },
+                        {
+                            "type": "postback",
+                            "title": "Main Menu",
+                            "payload": "BACK_TO_MAIN_MENU"
+                        }
+                    ]
+                }
+            }
+        } 
+        return response;
     }
 
     module.exports = {
         sendLearnMoreTemplate,
         handleProductDetialTemplate,
         requestPricesOptionsTemplate,
-        vendorInformationTemplate
+        vendorInformationTemplate,
+        sendLookupRegisterTemplate
     };

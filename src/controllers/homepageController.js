@@ -76,6 +76,8 @@ let handleMessage = async (sender_psid, received_message) =>{
         let payload = received_message.quick_reply.payload;
         if(payload === 'LEARN_MORE') {
             await chatbotService.sendLearnMore(sender_psid);
+        }else if(payload === 'REGISTER_USER') {
+            await chatbotService.sendLookupRegister(sender_psid);
         } else if(payload === 'TALK_AGENT') {
             await chatbotService.requestTalkToAgent(sender_psid);
         }
@@ -154,6 +156,11 @@ let handlePostback = async (sender_psid, received_postback) => {
         case 'ASK_INFO':
             await chatbotService.vendorInformation(sender_psid);
             break;
+        case 'SET_INFO_REGISTER':
+            await chatbotService.setInfoRegisterByWebView(sender_psid);
+            break;
+        case 'BACK_TO_MAIN_MENU':
+            await chatbotService.backToMainMenu(sender_psid);
         default:
             console.log('Run default switch case');
 
