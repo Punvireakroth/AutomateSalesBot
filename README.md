@@ -17,6 +17,5 @@ PAGE_ACCESS_TOKEN=
 <img src="./appScreen/3.png" width="700">
 <img src="./appScreen/4.png" width="700">
 <img src="./appScreen/5.png" width="700">
-<img src="./appScreen/6.png" width="700">
-<img src="./appScreen/7.png" width="700">
+
 
