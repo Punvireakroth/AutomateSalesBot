@@ -15,6 +15,8 @@ let initWebRoutes = (app) => {
 
     router.get('/set-up-profile', homepageController.getSetupProfilePage);
 
+    router.get('/info-register', homepageController.getInfoRegisterPage);
+
     
     return app.use('/', router);
 };

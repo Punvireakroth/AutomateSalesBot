@@ -172,9 +172,13 @@ let sendLookupRegisterTemplate = () => {
                 "text": "បំពេញពត៍មានដើម្បីចុះឈ្មោះ",
                 "buttons": [
                     {
-                        "type": "postback",
+
+                        "type": "web_url",
+                        "url": "https://3e30-143-110-219-93.ngrok-free.app/info-register",
+                        "webview_height_ratio": "tall",
+                        "messenger_extensions": true,
                         "title": "ចុះឈ្មោះ",
-                        "payload": "SET_INFO_REGISTER"
+                        // "payload": "SET_INFO_REGISTER"
 
                     },
                     {

@@ -185,10 +185,15 @@ let getSetupProfilePage = (req, res) => {
     return res.render("profile.ejs");
 };
 
+let getInfoRegisterPage = (req, res) => {
+    return res.render("infoRegister.ejs");
+};
+
 module.exports = {
     getHomePage,
     getWebhook,
     postWebhook,
     handleSetupProfile,
-    getSetupProfilePage
+    getSetupProfilePage,
+    getInfoRegisterPage,
 };
