@@ -1,5 +1,5 @@
 require('dotenv').config();
-import request from 'request';
+// import request from 'request';
 import homepageService from '../services/homepageService';
 import chatbotService from '../services/chatbotService';
 
@@ -78,10 +78,6 @@ let handleMessage = async (sender_psid, received_message) =>{
             await chatbotService.sendLearnMore(sender_psid);
         } else if(payload === 'TALK_AGENT') {
             await chatbotService.requestTalkToAgent(sender_psid);
-        } else if(payload === 'ASK_PRICE') {
-            await chatbotService.requestPricesOptions(sender_psid);
-        } else if(payload === 'ASK_INFO') {
-            await chatbotService.vendorInformation(sender_psid);
         }
         return;
     } 

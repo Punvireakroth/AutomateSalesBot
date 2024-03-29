@@ -9,30 +9,26 @@ let handleSetupProfileAPI = () => {
                 "get_started": {
                     "payload": "GET_STARTED"
                 },
-                "persistent_menu": [{
-                    "locale": "default",
-                    "composer_input_disabled": false,
-                    "call_to_actions": [{
-                            "type": "postback",
-                            "title": "Talk to an agent",
-                            "payload": "TALK_AGENT"
-                        },
-                        {
-                            "type": "postback",
-                            "title": "Restart this conversion",
-                            "payload": "RESTART"
-                        },
-                        {
-                            "type": "web_url",
-                            "title": "Check out my facebook",
-                            "url": "https://www.facebook.com/virak.roth.545",
-                            "webview_height_ratio": "full"
-                        },
-                        
-                    ]
-                }],
+                "persistent_menu": [
+                    {
+                        "locale": "default",
+                        "composer_input_disabled": false,
+                        "call_to_actions": [
+                            {
+                                "type": "postback",
+                                "title": "TALK_AGENT",
+                                "payload": "TALK_AGENT"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Restart this conversation",
+                                "payload": "RESTART_CONVERSATION"
+                            },
+                        ]
+                    }
+                ],
                 "whitelisted_domains": [
-                    "https://e119-217-197-11-10.ngrok-free.app",
+                    "https://3e30-143-110-219-93.ngrok-free.app/",
 
                 ],
 
@@ -84,7 +80,7 @@ let sendTypingOn = (sender_psid) => {
             "recipient": {
                 "id": sender_psid,
             },
-            "sender_action":"typing_on"
+            "sender_action": "typing_on"
         }
         let url = `https://graph.facebook.com/v2/me/messages?access_token=${process.env.PAGE_ACCESS_TOKEN};`;
         try {
@@ -111,7 +107,7 @@ let markMessageRead = (sender_psid) => {
             "recipient": {
                 "id": sender_psid,
             },
-            "sender_action":"mark_seen"
+            "sender_action": "mark_seen"
         }
         let url = `https://graph.facebook.com/v2/me/messages?access_token=${process.env.PAGE_ACCESS_TOKEN};`;
         try {

@@ -65,7 +65,6 @@ let handleFirstUser = (sender_psid, response) => {
                     "content_type": "text",
                     "title": "ពត៍មានបន្ថែម",
                     "payload": "LEARN_MORE",
-                    "image_url": "http://example.com/img/red.png"
                 }],
             };
             await sendMessage(sender_psid, firstResponse);
@@ -159,8 +158,6 @@ let requestTalkToAgent = (sender_psid) => {
         }
     });
 };
-
-
 
 
 module.exports = {
